@@ -159,7 +159,7 @@ class TripleString
 { 
    private String string1, string2, string3;
    public static final int MAX_LEN = 20;
-   public static final int MAX_PULLS = 5;
+   public static final int MAX_PULLS = 40;
    public static int pullWinnings[] = new int[MAX_PULLS];
    public static int index = 0;
 

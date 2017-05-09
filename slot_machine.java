@@ -21,7 +21,7 @@ public class Assign2
       } 
 
    }
-   //******************int getBet()
+   
    public static int getBet()
    {
       //Scanner will allow for user input
@@ -45,7 +45,6 @@ public class Assign2
       }
    }
 
-   //***************************TripleString pull()
    public static TripleString pull()
    {
       //Use reel to set TripleString default constructor to initialize string members 
@@ -63,7 +62,6 @@ public class Assign2
       return reel;
    }
 
-   //***********************************String randString()
    static String randString()
    {
       
@@ -96,7 +94,6 @@ public class Assign2
 
    }
 
-   //*************************int getPayMultiplier (TripleString thePull)
    public static int getPayMultiplier(TripleString pullString)
    {
       // Sort the first 3rd of the TripleString
@@ -134,7 +131,6 @@ public class Assign2
       return 0;
    }
 
-   //****************************void display (TripleString thePull, int winnings )
 // This method takes the winnings (a dollar amount) and thePull as parameters and displays the three strings inside thePull along with " losing statement" or "winning statement & dollar amount".
 
 

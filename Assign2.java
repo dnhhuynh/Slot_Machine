@@ -27,8 +27,9 @@ public class Assign2
       } 
       
       //Display exiting message
-      System.out.print(pullString.displayWinnings());
-      System.out.print("Thank you for playing.");
+      System.out.print("Your individual winnings are: \n" + pullString.displayWinnings());
+      System.out.print("\nYour total winnings is: " + pullString.totalWinnings);
+      System.out.print("\nThank you for playing.");
 
    }
 
@@ -161,6 +162,7 @@ class TripleString
    public static final int MAX_PULLS = 40;
    public static int pullWinnings[] = new int[MAX_PULLS];
    public static int index = 0;
+   public int totalWinnings = 0;
 
    //Default Constructor
    public TripleString()
@@ -263,6 +265,7 @@ class TripleString
       for (int i = 0; i < index; i++)
       {
          allWinnings += Integer.toString(pullWinnings[i]) + " ";
+         totalWinnings += pullWinnings[i];
       }
 
       return allWinnings;

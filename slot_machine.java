@@ -12,7 +12,6 @@ public class Assign2
       TripleString pullString = new TripleString();
 
       System.out.print("Welcome to the Hunger Games Slot Machine!\n");
-      
 
       while (toBet != 0 && pullString.continuePlay())
       {
@@ -71,7 +70,8 @@ public class Assign2
 
       return reel;
    }
-
+   
+   //Randomly generates value for slot machine based on defined probabilities
    static String randString()
    {
 
@@ -151,8 +151,6 @@ public class Assign2
       else
          System.out.println ("Winning statement: " + winnings);
    }
-
-
 }
 
 class TripleString

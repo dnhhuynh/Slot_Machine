@@ -10,22 +10,23 @@ public class Assign2
       int multiplier;
       int winnings;
       TripleString pullString = new TripleString();
-
+      
+      //Display welcome message
       System.out.print("Welcome to the Hunger Games Slot Machine!\n");
 
+      //Continue plays while user input does not equal 0 and number of plays does not exceed MAX_PULL
       while (toBet != 0 && pullString.continuePlay())
       {
          toBet = getBet();
          if(toBet == 0) break;
-        
-            pullString = pull();
-            multiplier = getPayMultiplier(pullString);
-            winnings = multiplier*toBet;
-            display(pullString, winnings);
-            pullString.saveWinnings(winnings);
-         
+         pullString = pull();
+         multiplier = getPayMultiplier(pullString);
+         winnings = multiplier*toBet;
+         display(pullString, winnings);
+         pullString.saveWinnings(winnings);   
       } 
-
+      
+      //Display exiting message
       System.out.print(pullString.displayWinnings());
       System.out.print("Thank you for playing.");
 

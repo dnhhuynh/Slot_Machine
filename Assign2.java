@@ -149,9 +149,9 @@ public class Assign2
       System.out.print (thePull.getFirst() + " " + thePull.getSecond() + " " + thePull.getThird() + "\n");
 
       if (winnings == 0)
-         System.out.println ("Losing statement… ");
+         System.out.println ("You lost, try again! ");
       else
-         System.out.println ("Winning statement: " + winnings);
+         System.out.println ("Congratulations you won : $ " + winnings);
    }
 }
 

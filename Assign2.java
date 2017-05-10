@@ -1,3 +1,16 @@
+/*
+Danh Huynh
+Steven Hunt
+Norma Sanchez
+Guadalupe Alejo
+Brenna Eckel
+
+Assignment 2: Casino
+Description: Create a slot machine program that prompts the user to enter an 
+integer between 1 and 100 as a bet, simulates a slot machine, and displays the 
+whether the user won or lost, and displays the amount won
+*/
+
 import java.util.*;
 import java.lang.Math;
 
@@ -15,7 +28,7 @@ public class Assign2
       System.out.print("Welcome to the Hunger Games Slot Machine!\n");
 
       //Continue plays while user input does not equal 0 and number of plays does not exceed MAX_PULL
-      while (toBet != 0 && pullString.continuePlay())
+      while (pullString.continuePlay())
       {
          toBet = getBet();
          if(toBet == 0) break;
@@ -26,13 +39,14 @@ public class Assign2
          pullString.saveWinnings(winnings);   
       } 
       
-      //Display exiting message
-      System.out.print("Your individual winnings are: \n" + pullString.displayWinnings());
+      //Displays individual winnings, total winnings, and thank message
+      System.out.print("\nYour individual winnings are: \n" + pullString.displayWinnings());
       System.out.print("\nYour total winnings is: " + pullString.totalWinnings);
       System.out.print("\nThank you for playing.");
 
    }
 
+   // Asks user to enter the bet amount and returns it
    public static int getBet()
    {
       //Scanner will allow for user input
@@ -56,16 +70,17 @@ public class Assign2
       }
    }
 
+   // Generates a pull string and returns it
    public static TripleString pull()
    {
-      //Use reel to set TripleString default constructor to initialize string members 
+      // Use reel to set TripleString default constructor to initialize string members 
       TripleString reel = new TripleString();
 
-      //Output result message
+      // Output result message
       System.out.print("Thank you, and may the odds be ever in your favor!\n");
       System.out.print("***YOUR PULL IS***\n");
 
-      //Set mutators that intake private helper method randString()
+      // Set mutators that intake private helper method randString()
       reel.setFirst(randString());
       reel.setSecond(randString());
       reel.setThird(randString());
@@ -73,18 +88,18 @@ public class Assign2
       return reel;
    }
    
-   //Randomly generates value for slot machine based on defined probabilities
+   // Randomly generates value for slot machine based on defined probabilities
    static String randString()
    {
 
       String randStr;
 
-      //generate a random integer in the range from 0 to 999
+      // generate a random integer in the range from 0 to 999
       Random randomGenerator = new Random(); 
       int randInt = randomGenerator.nextInt(1000);    
 
-      //assign string value to random number according to probabilities: 
-      //50% "BAR", 25% "cherries", 12.5% "space", 12.5% "7"
+      // assign string value to random number according to probabilities: 
+      // 50% "BAR", 25% "cherries", 12.5% "space", 12.5% "7"
       if (randInt < 500)
       {
          randStr = "BAR";
@@ -106,6 +121,7 @@ public class Assign2
 
    }
 
+   // Takes a TripleString object and generate a multiplier based on that object
    public static int getPayMultiplier(TripleString pullString)
    {
       // Sort the first 3rd of the TripleString
@@ -149,9 +165,9 @@ public class Assign2
       System.out.print (thePull.getFirst() + " " + thePull.getSecond() + " " + thePull.getThird() + "\n");
 
       if (winnings == 0)
-         System.out.println ("Losing statement… ");
+         System.out.println ("You lose. Try again.\n");
       else
-         System.out.println ("Winning statement: " + winnings);
+         System.out.println ("You won: " + winnings + "\n");
    }
 }
 
@@ -161,16 +177,16 @@ class TripleString
    public static final int MAX_LEN = 20;
    public static final int MAX_PULLS = 40;
    public static int pullWinnings[] = new int[MAX_PULLS];
-   public static int index = 0;
+   public static int round = 0;
    public int totalWinnings = 0;
 
-   //Default Constructor
+   // Default Constructor
    public TripleString()
    {
       string1 = string2 = string3 = "";
    }
 
-   //Mutators
+   // Mutators
    public boolean setFirst(String firstSymbol)
    {
       if (validString(firstSymbol))
@@ -204,7 +220,7 @@ class TripleString
          return false;
    }
 
-   //Accessors
+   // Accessors
    public String getFirst()
    {
       return string1;
@@ -220,14 +236,16 @@ class TripleString
       return string3;
    }
 
+   // Method to combine all strings
    public String toString()
    {
       return getFirst() + getSecond() + getThird();
    }
    
+   // Method to determine whether the rounds is less than the maximum pulls allowed
    public boolean continuePlay()
    {
-      if (index == MAX_PULLS)
+      if (round == MAX_PULLS)
       {
          return false;
       }
@@ -235,6 +253,7 @@ class TripleString
          return true;
    }
    
+   // Determines if the string inputted by the user is valid
    private boolean validString(String str)
    {
       if (str.length() <= MAX_LEN)
@@ -245,24 +264,26 @@ class TripleString
          return false;
    }
 
-   //Winning Methods
+   // Winning Methods
+   // Stores winnings into the pullWinnings array
    public boolean saveWinnings(int winnings)
    {
-      if (index < MAX_PULLS)
+      if (round < MAX_PULLS)
       {
-         pullWinnings[index] = winnings;
-         ++index;
+         pullWinnings[round] = winnings;
+         ++round;
          return true;
       }
       else
          return false;
    }
 
+   // Creates a string contain every individual winning
    public String displayWinnings()
    {
       String allWinnings = "";
 
-      for (int i = 0; i < index; i++)
+      for (int i = 0; i < round; i++)
       {
          allWinnings += Integer.toString(pullWinnings[i]) + " ";
          totalWinnings += pullWinnings[i];
@@ -274,4 +295,179 @@ class TripleString
 } 
 
 /***********************************OUTPUT******************************************
+Welcome to the Hunger Games Slot Machine!
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+(space) BAR BAR
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+BAR BAR cherries
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+(space) cherries BAR
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+cherries cherries BAR
+You won: 250
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+BAR BAR BAR
+You won: 2500
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+BAR 7 BAR
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+7 BAR (space)
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+cherries BAR BAR
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+7 cherries cherries
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+(space) cherries 7
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+BAR (space) BAR
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+BAR BAR BAR
+You won: 2500
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+(space) BAR BAR
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+BAR (space) cherries
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+7 BAR cherries
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+BAR 7 BAR
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+BAR BAR 7
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+BAR BAR BAR
+You won: 2500
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+7 BAR cherries
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+BAR cherries cherries
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+(space) BAR BAR
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+cherries 7 BAR
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+BAR cherries BAR
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+cherries BAR BAR
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+BAR cherries cherries
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+cherries BAR 7
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+BAR BAR BAR
+You won: 2500
+
+Place a bet from 1 to 100 or enter 0 to quit: 50
+Thank you, and may the odds be ever in your favor!
+***YOUR PULL IS***
+7 BAR (space)
+You lose. Try again.
+
+Place a bet from 1 to 100 or enter 0 to quit: 0
+
+Your individual winnings are: 
+0 0 0 250 2500 0 0 0 0 0 0 2500 0 0 0 0 0 2500 0 0 0 0 0 0 0 0 2500 0 
+Your total winnings is: 10250
+Thank you for playing.
 *************************************************************************************/

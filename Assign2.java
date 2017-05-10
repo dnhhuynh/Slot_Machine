@@ -356,6 +356,7 @@ Thank you, and may the odds be ever in your favor!
 (space) cherries 7
 You lose. Try again.
 
+Place a bet from 1 to 100 or enter 0 to quit: -5
 Place a bet from 1 to 100 or enter 0 to quit: 50
 Thank you, and may the odds be ever in your favor!
 ***YOUR PULL IS***
